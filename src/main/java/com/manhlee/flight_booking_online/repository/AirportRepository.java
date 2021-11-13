@@ -18,4 +18,11 @@ public interface AirportRepository extends CrudRepository<AirportEntity, Integer
             "on a.city_id=T.id\n" +
             "order by a.id asc")
     List<AirportEntity> allAirport();
+
+    @Query(nativeQuery = true, value = "SELECT * FROM airport A\n" +
+            "WHERE airport_name NOT IN (SELECT A.airport_name FROM airport A\n" +
+            "INNER JOIN flight_route F ON F.departure_id = A.id\n" +
+            "where F.departure_id=?1 \n" +
+            "group by A.airport_name)")
+    List<AirportEntity> getDestinationByDepartureId(int id);
 }

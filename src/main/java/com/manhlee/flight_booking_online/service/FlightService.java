@@ -29,4 +29,8 @@ public class FlightService {
         }
         return null;
     }
+
+    public List<FlightEntity> getFlightByAircraftId(int id){
+        return flightRepository.findByAircraft_Id(id);
+    }
 }

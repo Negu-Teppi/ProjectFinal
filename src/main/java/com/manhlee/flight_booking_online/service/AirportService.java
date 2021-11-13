@@ -26,6 +26,9 @@ public class AirportService {
         return null;
     }
 
+    public List<AirportEntity> getDestination(int id){
+        return airportRepository.getDestinationByDepartureId(id);
+    }
     public void save(AirportEntity airport){
         airportRepository.save(airport);
     }

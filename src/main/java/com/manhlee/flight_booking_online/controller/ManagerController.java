@@ -59,11 +59,6 @@ public class ManagerController {
     @Autowired
     private ImageService imageService;
 
-    @Autowired
-    private SeatService seatService;
-
-//    @Autowired
-//    private PromotionService promotionService;
 
     @RequestMapping("/home")
     public String viewHome(Model model) {
@@ -270,8 +265,8 @@ public class ManagerController {
 
     @RequestMapping("/aircraft-seat/view")
     public String viewAircraftSeat(Model model){
-        model.addAttribute("flightRoutes", flightRouteService.getFlightRoutes());
-        return "manager/setup/flight-route/view-flightRoute";
+        model.addAttribute("aircraftSeats", aircraftSeatService.getAircraftSeats());
+        return "manager/setup/aircraft/view-aircraft-seat";
     }
 
     @RequestMapping(value = "/aircraft-seat/add")
@@ -299,10 +294,13 @@ public class ManagerController {
 
     @RequestMapping("/aircraft-seat/edit/{id}")
     public String updateAircraftSeat(Model model, @PathVariable("id") int id){
-        model.addAttribute("flightRoute", flightRouteService.getFlightRoute(id));
-        model.addAttribute("airports", airportService.getAirports());
+        model.addAttribute("aircraft", aircraftSeatService.getAircraftSeat(id));
+        model.addAttribute("seatTypes", SeatType.values());
+        model.addAttribute("seatStatus", SeatStatus.values());
+        model.addAttribute("aircrafts", aircraftService.getAircrafts());
+        model.addAttribute("flights", flightService.getFlights());
         model.addAttribute("action", "update");
-        return "manager/setup/flight-route/edit-flight-route";
+        return "manager/setup/aircraft/edit-aircraft-seat";
     }
 
     @RequestMapping("/aircraft-seat/delete/{id}")
@@ -310,54 +308,4 @@ public class ManagerController {
         flightRouteService.deleteFlightRoute(id);
         return "redirect:/manager/flight-route/view";
     }
-
-//    @RequestMapping("/promotion/view")
-//    public String viewPromotion(Model model){
-//        model.addAttribute("promotions", promotionService.getPromotions());
-//        return "manager/manage/promotion/view-promotion";
-//    }
-//    @RequestMapping("/promotion/add-promotion")
-//    public String addPromotion(Model model){
-//        model.addAttribute("promotion", new PromotionEntity());
-//        model.addAttribute("flights", flightService.getFlights());
-//        model.addAttribute("action", "add");
-//        return "manager/manage/promotion/edit-promotion";
-//    }
-//
-//    @RequestMapping(value = "/promotion/result", method = RequestMethod.POST)
-//    public String resultPromotion(@ModelAttribute("promotion") PromotionEntity promotion){
-//
-////
-////        aircraftService.save(aircraft);
-//        List<MultipartFile> files = promotion.getFiles();
-//        List<ImageEntity> images = new ArrayList<>();
-//        if(files!=null && files.size()>0){
-//            for(MultipartFile file : files){
-//                ImageEntity image = new ImageEntity();
-//                try {
-//                    image.setName(file.getOriginalFilename());
-//                    images.add(image);
-//
-//                    String fileName = file.getOriginalFilename();
-//                    File imageFile = new File(servletContext.getRealPath("/resources-management/image/promotion"), fileName);
-//                    file.transferTo(imageFile);
-//                } catch (IOException e){
-//                    e.printStackTrace();
-//                }
-//                image.setPromotion(promotion);
-//            }
-//            promotion.setImages(images);
-//            promotionService.save(promotion);
-//        }
-//        return "redirect:/manager/promotion/view";
-//    }
-//
-//    @RequestMapping(value = "/promotion/edit/{id}")
-//    public String editPromotion(Model model, @PathVariable("id") int id){
-//
-//        model.addAttribute("aircraft", aircraftService.getAircraft(id));
-//        model.addAttribute("images", imageService.getImagesAircraft(id));
-//        model.addAttribute("action", "update");
-//        return "manager/manage/promotion/edit-promotion";
-//    }
 }

@@ -80,6 +80,7 @@
                                     <div class="col-lg-6 p-t-20">
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                                             <select name="aircraft.id" class="mdl-textfield__input" id="aID">
+                                                <option>Select Aircraft</option>
                                                 <c:forEach items="${aircrafts}" var="aircraft">
                                                     <option value="${aircraft.id}">${aircraft.name}</option>
                                                 </c:forEach>
@@ -115,20 +116,19 @@
                                     </div>
                                     <div class="col-lg-6 p-t-20">
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                            <select name="flight.id" class="mdl-textfield__input">
-                                                <c:forEach items="${flights}" var="flight">
-                                                    <option value="${flight.id}">${flight.aircraft.name}</option>
-                                                </c:forEach>
+                                            <select name="flight.id" class="mdl-textfield__input" id="flight">
+<%--                                                <c:forEach items="${flights}" var="flight">--%>
+<%--                                                    <option value="${flight.id}">${flight.flightRoute.departure.airportName}--%>
+<%--                                                        to ${flight.flightRoute.destination.airportName}</option>--%>
+<%--                                                </c:forEach>--%>
                                             </select>
                                             <label class="mdl-textfield__label">Flight</label>
+                                            <span>Q: Seat co dinh hay la set theo chuyen bay</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 p-t-20">
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                                             <select name="seat.id" class="mdl-textfield__input" id="seat">
-<%--                                                <c:forEach items="${seats}" var="seat">--%>
-<%--                                                    <option value="${seat.id}">${seat.seatNumber}</option>--%>
-<%--                                                </c:forEach>--%>
                                             </select>
                                             <label class="mdl-textfield__label">Seat</label>
                                         </div>
@@ -164,37 +164,22 @@
                 url:"${pageContext.request.contextPath}/api/getSeats",
                 data: {aircraftId : aircraftId},
                 success: function (result){
-                    var s = '';
-                    for(var i = 0; i < result.length; i++) {
-                        var seat =  result[i];
-                        s += '<option value="' + seat['id'] + '">' + seat.seatNumber + '</option>';
-                    }
-                    $('#seat').html(s);
+                    $('#seat').html(result);
+                }
+            });
+        });
+        $("#aID").on('change', function (){
+            var aircraftId =  $("#aID").val();
+            $.ajax({
+                type: 'GET',
+                url:"${pageContext.request.contextPath}/api/getFlights",
+                data: {aircraftId : aircraftId},
+                success: function (result){
+                    $('#flight').html(result);
                 }
             });
         });
     });
-    // $(document).ready(function(){
-    //     $.validator.addMethod("duration", function (value, element){
-    //         return /^([01]?[0-9]|2[0-3])(:[0-5][0-9]){2}$/.test(value);
-    //     }, "Invalid time format.");
-    //     $("#flight-route").validate({
-    //         rules: {
-    //             duration: {
-    //                 required: true,
-    //                 duration: true
-    //             },
-    //             distance: {
-    //                 required: true,
-    //                 digits: true
-    //             },
-    //             price: {
-    //                 required: true,
-    //                 number: true
-    //             }
-    //         }
-    //     });
-    // });
 </script>
 </body>
 </html>

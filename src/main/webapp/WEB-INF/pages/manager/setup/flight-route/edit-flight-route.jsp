@@ -96,7 +96,8 @@
                                     </div>
                                     <div class="col-lg-6 p-t-20">
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                            <select name="departure.id" class="mdl-textfield__input">
+                                            <select name="departure.id" class="mdl-textfield__input" id="departure">
+                                                <option>Select Departure</option>
                                                 <c:forEach items="${airports}" var="airport">
                                                     <c:if test="${airport.airportName == flightRoute.departure.airportName}">
                                                         <option value="${airport.id}" selected>${airport.airportName}</option>
@@ -111,15 +112,15 @@
                                     </div>
                                     <div class="col-lg-6 p-t-20">
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                            <select name="destination.id" class="mdl-textfield__input">
-                                                <c:forEach items="${airports}" var="airport">
-                                                    <c:if test="${airport.airportName == flightRoute.destination.airportName}">
-                                                        <option value="${airport.id}" selected>${airport.airportName}</option>
-                                                    </c:if>
-                                                    <c:if test="${airport.airportName != flightRoute.destination.airportName}">
-                                                        <option value="${airport.id}">${airport.airportName}</option>
-                                                    </c:if>
-                                                </c:forEach>
+                                            <select name="destination.id" class="mdl-textfield__input" id="destination">
+<%--                                                <c:forEach items="${airports}" var="airport">--%>
+<%--                                                    <c:if test="${airport.airportName == flightRoute.destination.airportName}">--%>
+<%--                                                        <option value="${airport.id}" selected>${airport.airportName}</option>--%>
+<%--                                                    </c:if>--%>
+<%--                                                    <c:if test="${airport.airportName != flightRoute.destination.airportName}">--%>
+<%--                                                        <option value="${airport.id}">${airport.airportName}</option>--%>
+<%--                                                    </c:if>--%>
+<%--                                                </c:forEach>--%>
                                             </select>
                                             <label class="mdl-textfield__label">Destination</label>
                                         </div>
@@ -181,6 +182,17 @@
                     number: true
                 }
             }
+        });
+        $("#departure").on('change', function (){
+            var departureId =  $("#departure").val();
+            $.ajax({
+                type: 'GET',
+                url:"${pageContext.request.contextPath}/api/getDestination",
+                data: {departureId : departureId},
+                success: function (result){
+                    $('#destination').html(result);
+                }
+            });
         });
     });
 </script>

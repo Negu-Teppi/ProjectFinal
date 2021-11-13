@@ -183,5 +183,7 @@
     <!-- end footer -->
 </div>
 <jsp:include page="/WEB-INF/pages/include/management/js-page.jsp" />
+<script>
+</script>
 </body>
 </html>
