@@ -66,10 +66,10 @@
                     <div class="page-title-breadcrumb">
                         <div class=" pull-left">
                             <c:if test="${action == 'add'}">
-                                <div class="page-title">Update Aircraft</div>
+                                <div class="page-title">Update Promotion</div>
                             </c:if>
                             <c:if test="${action == 'update'}">
-                                <div class="page-title">Edit Aircraft</div>
+                                <div class="page-title">Edit Promotion</div>
                             </c:if>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
@@ -78,10 +78,10 @@
                             <li><a class="parent-item" href="">Staff</a>&nbsp;<i class="fa fa-angle-right"></i>
                             </li>
                             <c:if test="${action == 'add'}">
-                                <li class="active">Add Aircraft</li>
+                                <li class="active">Add Promotion</li>
                             </c:if>
                             <c:if test="${action == 'update'}">
-                                <li class="active">Edit Aircraft</li>
+                                <li class="active">Edit Promotion</li>
                             </c:if>
 
                         </ol>
@@ -92,7 +92,7 @@
                         <div class="card-box">
                             <div class="card-head">
                                 <c:if test="${action == 'add'}">
-                                    <header>Aircraft Information</header>
+                                    <header>Promotion Information</header>
                                 </c:if>
                                 <c:if test="${action == 'update'}">
                                     <header>Update Information</header>
@@ -124,41 +124,47 @@
                                     </div>
                                     <div class="col-lg-6 p-t-20">
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                            <textarea class="mdl-textfield__input" type="text" name="number"/>
-                                            <label class="mdl-textfield__label">Number</label>
+                                            <textarea class="mdl-textfield__input" type="text" name="description"></textarea>
+                                            <label class="mdl-textfield__label">Description</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 p-t-20">
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                            <input class="mdl-textfield__input" type="text" value="${promotion.rowNumber}"
-                                                   pattern="-?[A-Z0-9]*(\.[0-9]+)?" name="rowNumber">
-                                            <label class="mdl-textfield__label">Row</label>
+                                            <input class="mdl-textfield__input" type="date" value="${promotion.startDate}" name="startDate">
+                                            <label class="mdl-textfield__label">Start Date</label>
                                             <span class="mdl-textfield__error">Number or text required!</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 p-t-20">
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                            <input class="mdl-textfield__input" type="text" value="${promotion.colNumber}"
-                                                   pattern="-?[A-Z]*(\.[0-9]+)?" name="colNumber">
-                                            <label class="mdl-textfield__label">Column</label>
+                                            <input class="mdl-textfield__input" type="date" value="${promotion.endDate}" name="endDate">
+                                            <label class="mdl-textfield__label">End Date</label>
                                             <span class="mdl-textfield__error">Text required!</span>
                                         </div>
                                     </div>
+                                    <div class="col-lg-6 p-t-20">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                            <input class="mdl-textfield__input" type="number" value="${promotion.discount}"
+                                                   pattern="-?[A-Z]*(\.[0-9]+)?" name="discount">
+                                            <label class="mdl-textfield__label">Discount</label>
+                                            <span class="mdl-textfield__error">Text required!</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 p-t-20">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                            <select name="status" class="mdl-textfield__input">
+                                                <c:forEach items="${status}" var="st">
+                                                    <option value="${st}"> ${st}</option>
+                                                </c:forEach>
+                                            </select>
+                                            <label class="mdl-textfield__label">Status</label>
+                                            <span class="mdl-textfield__error">Number or text required!</span>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12 p-t-20">
+
                                         <label class="control-label col-md-3">Upload Room Photos</label>
                                         <br/>
-                                        <c:if test="${action == 'update'}">
-                                            <c:forEach items="${images}" var="image" varStatus="index">
-                                                <div class="image-area col-lg-6 p-t-20" id="imageList">
-                                                    <img
-                                                            src="<c:url value="/resources-management/image/aircraft/"/>${image.name}"/>
-                                                    <a class="remove-image" href="#" style="display: inline;">&#215;</a>
-                                                </div>
-
-                                                <br/>
-                                            </c:forEach>
-                                        </c:if>
-
                                         <input type="file" name="files" id="image" multiple="multiple"/>
                                     </div>
                                     <div class="col-lg-12 p-t-20 text-center">

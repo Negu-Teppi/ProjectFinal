@@ -93,11 +93,11 @@
                                             <tr class="odd gradeX">
 
                                                 <td class="center">${seat.aircraft.name}</td>
-                                                <td class="center">${seat.flight.flightRoute.departure} to ${seat.flight.flightRoute.destination}</td>
+                                                <td class="center">${seat.flight.flightRoute.departure.airportName} to ${seat.flight.flightRoute.destination.airportName}</td>
                                                 <td class="center">${seat.seat.seatNumber}</td>
                                                 <td class="center">${seat.seatType.seatType}</td>
                                                 <td class="center">${seat.seatStatus.status}</td>
-                                                <td class="center">${seat.pricer}</td>
+                                                <td class="center">${seat.price}</td>
                                                 <td class="center">
                                                     <a href="<c:url
                                                         value="/manager/aircraft-seat/edit/${seat.id}"/> "
@@ -108,6 +108,7 @@
                                             </tr>
                                             </tbody>
                                         </c:forEach>
+                                        <span style="color: red">Q: co nen chon aircraft roi moi show list seat hay show all nhu nay</span>
                                     </table>
                                 </div>
                             </div>

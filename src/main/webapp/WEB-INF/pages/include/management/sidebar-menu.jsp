@@ -55,6 +55,11 @@
                                 <span class="title">Set Seat</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<c:url value="/manager/aircraft-seat/view"/> " class="nav-link ">
+                                <span class="title">View Seat</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -166,47 +171,18 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link nav-toggle">
                         <i class="material-icons">business_center</i>
-                        <span class="title">Manage Flight Routes</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li class="nav-item">
-                            <a href="new_booking.html" class="nav-link ">
-                                <span class="title">Add</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="view_booking.html" class="nav-link ">
-                                <span class="title">Edit</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="edit_booking.html" class="nav-link ">
-                                <span class="title">Update Status</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link nav-toggle">
-                        <i class="material-icons">business_center</i>
                         <span class="title">Manage Promotion</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item">
-                            <a href="new_booking.html" class="nav-link ">
+                            <a href="<c:url value="/manager/promotion/view"/>" class="nav-link ">
+                                <span class="title">View</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<c:url value="/manager/promotion/add-promotion"/>" class="nav-link ">
                                 <span class="title">Add</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="view_booking.html" class="nav-link ">
-                                <span class="title">Edit</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="edit_booking.html" class="nav-link ">
-                                <span class="title">Update Status</span>
                             </a>
                         </li>
                     </ul>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PromotionService {
@@ -15,6 +16,14 @@ public class PromotionService {
 
     public List<PromotionEntity> getPromotions(){
         return (List<PromotionEntity>) promotionRepository.findAll();
+    }
+
+    public PromotionEntity getPromotion(int id){
+        Optional<PromotionEntity> optional = promotionRepository.findById(id);
+        if(optional.isPresent()){
+            return optional.get();
+        }
+        return null;
     }
 
     public void save(PromotionEntity promotionEntity){

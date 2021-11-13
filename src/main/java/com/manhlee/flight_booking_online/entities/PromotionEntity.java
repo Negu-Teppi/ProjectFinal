@@ -22,7 +22,7 @@ public class PromotionEntity {
     @Column(length = 1000)
     private String description;
 
-    @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ImageEntity> images;
 
     @Temporal(TemporalType.TIMESTAMP)

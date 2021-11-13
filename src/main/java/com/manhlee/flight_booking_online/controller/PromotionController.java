@@ -2,6 +2,7 @@ package com.manhlee.flight_booking_online.controller;
 
 import com.manhlee.flight_booking_online.entities.ImageEntity;
 import com.manhlee.flight_booking_online.entities.PromotionEntity;
+import com.manhlee.flight_booking_online.enums.PromotionStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.manhlee.flight_booking_online.service.FlightService;
 import com.manhlee.flight_booking_online.service.PromotionService;
@@ -17,6 +18,7 @@ import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -32,24 +34,25 @@ public class PromotionController {
     @Autowired
     private FlightService flightService;
 
-    @RequestMapping("/promotion/view")
+    @RequestMapping("/view")
     public String viewPromotion(Model model){
         model.addAttribute("promotions", promotionService.getPromotions());
         return "manager/manage/promotion/view-promotion";
     }
-    @RequestMapping("/promotion/add-promotion")
+    @RequestMapping("/add-promotion")
     public String addPromotion(Model model){
         model.addAttribute("promotion", new PromotionEntity());
-        model.addAttribute("flights", flightService.getFlights());
+        model.addAttribute("status", PromotionStatusEnum.values());
         model.addAttribute("action", "add");
         return "manager/manage/promotion/edit-promotion";
     }
 
-    @RequestMapping(value = "/promotion/result", method = RequestMethod.POST)
+    @RequestMapping(value = "/result", method = RequestMethod.POST)
     public String resultPromotion(@ModelAttribute("promotion") PromotionEntity promotion){
 
 //
 //        aircraftService.save(aircraft);
+        Date date = new Date();
         List<MultipartFile> files = promotion.getFiles();
         List<ImageEntity> images = new ArrayList<>();
         if(files!=null && files.size()>0){
@@ -67,18 +70,19 @@ public class PromotionController {
                 }
                 image.setPromotion(promotion);
             }
+            promotion.setCreateDate(date);
             promotion.setImages(images);
             promotionService.save(promotion);
         }
         return "redirect:/manager/promotion/view";
     }
 
-//    @RequestMapping(value = "/promotion/edit/{id}")
-//    public String editPromotion(Model model, @PathVariable("id") int id){
-//
-//        model.addAttribute("aircraft", aircraftService.getAircraft(id));
-//        model.addAttribute("images", imageService.getImagesAircraft(id));
-//        model.addAttribute("action", "update");
-//        return "manager/manage/promotion/edit-promotion";
-//    }
+    @RequestMapping(value = "edit/{id}")
+    public String editPromotion(Model model, @PathVariable("id") int id){
+
+        model.addAttribute("promotion", promotionService.getPromotion(id));
+        model.addAttribute("status", PromotionStatusEnum.values());
+        model.addAttribute("action", "update");
+        return "manager/manage/promotion/edit-promotion";
+    }
 }

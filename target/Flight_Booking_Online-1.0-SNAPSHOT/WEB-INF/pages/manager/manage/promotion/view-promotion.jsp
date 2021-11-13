@@ -49,7 +49,7 @@
                                 <div class="row p-b-20">
                                     <div class="col-md-6 col-sm-6 col-6">
                                         <div class="btn-group">
-                                            <a href='<c:url value="/manager/aircraft/add-aircraft"/>' id="addRow" class="btn btn-info">
+                                            <a href='<c:url value="/manager/promotion/add-promotion"/>' id="addRow" class="btn btn-info">
                                                 Add New <i class="fa fa-plus"></i>
                                             </a>
                                         </div>
@@ -82,39 +82,40 @@
                                         <tr>
                                             <th class="center"> Image </th>
                                             <th class="center"> Name </th>
+                                            <th class="center"> Create Date </th>
                                             <th class="center"> Start Date </th>
                                             <th class="center"> End Date </th>
-                                            <th class="center"> Create Date </th>
                                             <th class="center"> Description </th>
                                             <th class="center"> Discount </th>
                                             <th class="center"> Status </th>
                                             <th class="center"> Action </th>
                                         </tr>
                                         </thead>
-                                        <c:forEach items="${aircrafts}" var="aircraft">
+                                        <c:forEach items="${promotions}" var="promotion">
                                             <tbody>
                                             <tr class="odd gradeX">
-
-                                                <td class="center">${aircraft.name}</td>
-                                                <td class="center">${aircraft.number}</td>
-                                                <td class="center">
-                                                    <c:forEach items="${aircraft.images}" var="image">
-                                                        <img width="10%" height="5%"
-                                                             src="<c:url value="/resources-management/image/aircraft/"/>${image.name}"/>
+                                                <td class="user-circle-img">
+                                                    <c:forEach items="${promotion.images}" var="image">
+                                                        <img width="100px" height="100px"
+                                                             src="<c:url value="/resources-management/image/promotion/"/>${image.name}"/>
                                                     </c:forEach>
                                                 </td>
-                                                <td class="user-circle-img">
-                                                    <img src="" alt="">
-                                                </td>
+                                                <td class="center">${promotion.name}</td>
+                                                <td class="center">${promotion.createDate}</td>
+                                                <td class="center">${promotion.startDate}</td>
+                                                <td class="center">${promotion.endDate}</td>
+                                                <td class="center">${promotion.description}</td>
+                                                <td class="center">${promotion.discount}%</td>
+                                                <td class="center">${promotion.status}</td>
+<%--                                                <td class="user-circle-img">--%>
+<%--                                                    <img src="" alt="">--%>
+<%--                                                </td>--%>
                                                 <td class="center">
                                                     <a href="<c:url
-                                                        value="/manager/aircraft/edit/${aircraft.id}"/> "
+                                                        value="/manager/promotion/edit/${promotion.id}"/> "
                                                        class="btn btn-tbl-edit btn-xs">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
-                                                    <button onclick="location.href='<c:url value="/manager/aircraft/delete/${aircraft.id}"/>'" class="btn btn-tbl-delete btn-xs">
-                                                        <i class="fa fa-trash-o "></i>
-                                                    </button>
                                                 </td>
                                             </tr>
                                             </tbody>
